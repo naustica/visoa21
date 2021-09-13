@@ -1,0 +1,51 @@
+{
+  "name": "visoa21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --inline --hot --config ./webpack.dev.js",
+    "build": "webpack --config ./webpack.prod.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naustica/visoa21.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naustica/visoa21/issues"
+  },
+  "homepage": "https://github.com/naustica/visoa21#readme",
+  "dependencies": {
+    "@types/react-svg-map": "^2.1.1",
+    "dataframe-js": "^1.4.4",
+    "preact": "^10.4.8",
+    "preact-router": "^3.2.1",
+    "typescript": "^3.9.3",
+    "unistore": "^3.5.2"
+  },
+  "devDependencies": {
+    "@testing-library/preact": "^1.0.2",
+    "@types/chai": "^4.2.11",
+    "@types/jest": "^25.2.3",
+    "awesome-typescript-loader": "^5.2.1",
+    "chai": "^4.2.0",
+    "css-loader": "^3.5.3",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.5.0",
+    "html-webpack-plugin": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.0.1",
+    "sass": "^1.26.7",
+    "sass-google-fonts": "^1.0.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "svg-inline-loader": "^0.8.2",
+    "ts-jest": "^26.0.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

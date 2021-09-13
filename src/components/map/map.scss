@@ -1,0 +1,23 @@
+path:hover {
+  cursor: pointer;
+  fill: #FF851B;
+}
+
+path {
+  fill-opacity: 0.3;
+  stroke: #646464;
+  stroke-width: 1px;
+  stroke-dasharray: 1,1;
+  stroke-linejoin: round;
+}
+
+.filter-nav {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 300px;
+  height: 560px;
+  padding: 20px;
+
+}

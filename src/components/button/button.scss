@@ -1,0 +1,22 @@
+.filter-button {
+
+  background-color: white;
+  font-weight: 600;
+  border-width: 1px;
+  border-radius: 7px;
+  border-color: black;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  width: 150px;
+  cursor: pointer;
+
+  &-active {
+    @extend .filter-button;
+    background-color: #FF9E45;
+  }
+
+}
