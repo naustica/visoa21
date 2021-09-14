@@ -3,20 +3,25 @@
   background-color: white;
   font-weight: 600;
   border-width: 1px;
-  border-radius: 7px;
+  border-radius: 10px;
   border-color: black;
   color: black;
-  padding: 10px 32px;
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  width: 150px;
+  width: 170px;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
 
   &-active {
     @extend .filter-button;
-    background-color: #FF9E45;
+    background-color: #E1BF6C;
   }
-
+  &:hover {
+    //background-color: #E1BF6C;
+    box-shadow: 1px 1px #B0B0B0;
+  }
 }
