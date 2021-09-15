@@ -65,9 +65,11 @@
   height: 850px;
   padding-top: 20px;
   padding-bottom: 20px;
+  padding-top: -5px;
+  position: relative;
 
   &-heading {
-    padding-top: 5px;
+    padding-top: 8px;
     font-size: 14px;
     font-weight: 700;
     line-height: 16px;
@@ -78,6 +80,28 @@
     font-size: 14px;
     font-weight: 300;
     line-height: 20px;
+  }
+
+  .arrow-up {
+    position: absolute;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+
+  .arrow-down {
+    position: absolute;
+    top: 30px;
+    left: 160px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
   }
 
 }
@@ -91,6 +115,7 @@
   .beans {
     width: 300px;
     padding: 10px;
+    padding-left: 25px;
 
     &-percentage {
       font-size: 100px;
@@ -137,7 +162,7 @@
     }
 
     .footer-autoren {
-
+      padding-top: 3px;
     }
     .footer-autoren-heading {
         font-size: 16px;

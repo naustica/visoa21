@@ -17,7 +17,7 @@ interface State {
   filter: any
 }
 
-const NUMBER_OF_INSTITUTIONS = 400
+const NUMBER_OF_INSTITUTIONS = 190
 
 export default class Home extends Component<Props, State> {
 
@@ -33,7 +33,7 @@ export default class Home extends Component<Props, State> {
   private createDF = async (): Promise<void> => {
 
     try {
-      await DataFrame.fromCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vRVHbBuvBi2S2cXLmG0dXESa0nDYipSnLT-TexdAL8gUj1Pmh-6lQZAuCSrLLUsQ2L6oKWIjXFfy7io/pub?output=csv').then((df: any) => {
+      await DataFrame.fromCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vT9-LW3L2SH1MXqUirRh71kB9YIdQtEjJMFjutMD_--woLMwzMAEcIGnLMjyfAfAtpmumobq6VwdooF/pub?gid=1552294243&single=true&output=csv').then((df: any) => {
         this.setState({df: df})
         store.setState({df: df})
       })
@@ -72,72 +72,135 @@ export default class Home extends Component<Props, State> {
     return 0
   }
 
-  private applyFilter = () => {
+  private applyFilter = (value: string) => {
 
     const { filter, df } = this.state
 
     let grouped_df = new Array()
 
     if (filter.length == 2) {
-      grouped_df = df.groupBy(filter[0], filter[1]).aggregate((group: any) => group.count()).rename('aggregation', 'groupCount').filter((row: any) => row.get(filter[1]) === 'ja').toCollection()
+      grouped_df = df.groupBy(filter[0], filter[1]).aggregate((group: any) => group.count()).rename('aggregation', 'groupCount').filter((row: any) => row.get(filter[1]) === value).toCollection()
+
     }
 
     else if (filter.length == 3) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2]).aggregate((group: any) => group.count()).rename('aggregation', 'groupCount').filter((row: any) => row.get(filter[1]) === 'ja').filter((row: any) => row.get(filter[2]) === 'ja').toCollection()
+      grouped_df = df.groupBy(filter[0], filter[1], filter[2]).aggregate((group: any) => group.count()).rename('aggregation', 'groupCount').filter((row: any) => row.get(filter[1]) === value).filter((row: any) => row.get(filter[2]) === value).toCollection()
     }
 
     else if (filter.length == 4) {
       grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3]).aggregate(
         (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === 'ja').filter(
-            (row: any) => row.get(filter[2]) === 'ja').filter(
-              (row: any) => row.get(filter[3]) === 'ja').toCollection()
+          (row: any) => row.get(filter[1]) === value).filter(
+            (row: any) => row.get(filter[2]) === value).filter(
+              (row: any) => row.get(filter[3]) === value).toCollection()
     }
 
     else if (filter.length == 5) {
       grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4]).aggregate(
         (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === 'ja').filter(
-            (row: any) => row.get(filter[2]) === 'ja').filter(
-              (row: any) => row.get(filter[3]) === 'ja').filter(
-                (row: any) => row.get(filter[4]) === 'ja').toCollection()
+          (row: any) => row.get(filter[1]) === value).filter(
+            (row: any) => row.get(filter[2]) === value).filter(
+              (row: any) => row.get(filter[3]) === value).filter(
+                (row: any) => row.get(filter[4]) === value).toCollection()
     }
 
     else if (filter.length == 6) {
       grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5]).aggregate(
         (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === 'ja').filter(
-            (row: any) => row.get(filter[2]) === 'ja').filter(
-              (row: any) => row.get(filter[3]) === 'ja').filter(
-                (row: any) => row.get(filter[4]) === 'ja').filter(
-                  (row: any) => row.get(filter[5]) === 'ja').toCollection()
+          (row: any) => row.get(filter[1]) === "TRUE").filter(
+            (row: any) => row.get(filter[2]) === "TRUE").filter(
+              (row: any) => row.get(filter[3]) === "TRUE").filter(
+                (row: any) => row.get(filter[4]) === "TRUE").filter(
+                  (row: any) => row.get(filter[5]) === "TRUE").toCollection()
+    }
+
+    else if (filter.length == 7) {
+      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6]).aggregate(
+        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
+          (row: any) => row.get(filter[1]) === value).filter(
+            (row: any) => row.get(filter[2]) === value).filter(
+              (row: any) => row.get(filter[3]) === value).filter(
+                (row: any) => row.get(filter[4]) === value).filter(
+                  (row: any) => row.get(filter[5]) === value).filter(
+                    (row: any) => row.get(filter[6]) === value).toCollection()
+    }
+
+    else if (filter.length == 8) {
+      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6], filter[7]).aggregate(
+        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
+          (row: any) => row.get(filter[1]) === value).filter(
+            (row: any) => row.get(filter[2]) === value).filter(
+              (row: any) => row.get(filter[3]) === value).filter(
+                (row: any) => row.get(filter[4]) === value).filter(
+                  (row: any) => row.get(filter[5]) === value).filter(
+                    (row: any) => row.get(filter[6]) === value).filter(
+                      (row: any) => row.get(filter[7]) === value).toCollection()
+    }
+
+    else if (filter.length == 9) {
+      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6], filter[7], filter[8]).aggregate(
+        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
+          (row: any) => row.get(filter[1]) === value).filter(
+            (row: any) => row.get(filter[2]) === value).filter(
+              (row: any) => row.get(filter[3]) === value).filter(
+                (row: any) => row.get(filter[4]) === value).filter(
+                  (row: any) => row.get(filter[5]) === value).filter(
+                    (row: any) => row.get(filter[6]) === value).filter(
+                      (row: any) => row.get(filter[7]) === value).filter(
+                        (row: any) => row.get(filter[8]) === value).toCollection()
+    }
+
+    else if (filter.length == 10) {
+      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6], filter[7], filter[8], filter[9]).aggregate(
+        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
+          (row: any) => row.get(filter[1]) === value).filter(
+            (row: any) => row.get(filter[2]) === value).filter(
+              (row: any) => row.get(filter[3]) === value).filter(
+                (row: any) => row.get(filter[4]) === value).filter(
+                  (row: any) => row.get(filter[5]) === value).filter(
+                    (row: any) => row.get(filter[6]) === value).filter(
+                      (row: any) => row.get(filter[7]) === value).filter(
+                        (row: any) => row.get(filter[8]) === value).filter(
+                          (row: any) => row.get(filter[9]) === value).toCollection()
     }
 
     return grouped_df
   }
 
   private getBeansCount = () => {
-    const grouped_df = this.applyFilter()
+    const grouped_df_existing = this.applyFilter("TRUE")
+    const grouped_df_missing = this.applyFilter("Recherche fehlt")
 
-    let beansCount = 0
+    let beansCountExisting = 0
+    let beansCountMissing = 0
 
-    for (var i = 0; i < grouped_df.length; i++) {
-        beansCount += grouped_df[i].groupCount
+    for (var i = 0; i < grouped_df_existing.length; i++) {
+        beansCountExisting += grouped_df_existing[i].groupCount
     }
 
-    return beansCount
+    for (var i = 0; i < grouped_df_missing.length; i++) {
+        beansCountMissing += grouped_df_missing[i].groupCount
+    }
+
+    console.log(beansCountMissing)
+
+    return [beansCountExisting, beansCountMissing]
   }
 
   private renderBeans = (): ComponentChild => {
 
-    const beansCount = this.getBeansCount()
+    const beansCountExisting = this.getBeansCount()[0]
+    const beansCountMissing = this.getBeansCount()[1]
 
     let components = []
     let color = "#C8A64B"
 
     for(var i = 1; i < Array.from(Array(NUMBER_OF_INSTITUTIONS)).length; i++) {
-      if (i > beansCount) {
+      if (i > beansCountExisting) {
         color = "#3B2C25"
+      }
+      if (i < beansCountExisting + beansCountMissing && i > beansCountExisting) {
+        color = "#4E7332"
       }
       components.push(
         <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
@@ -154,10 +217,7 @@ export default class Home extends Component<Props, State> {
 
     let DE_BW, DE_MV, DE_BY, DE_BE, DE_BB, DE_HB, DE_HH, DE_HE, DE_NI, DE_NW, DE_RP, DE_SL, DE_SN, DE_ST, DE_SH, DE_TH = 0
 
-    const grouped_df = this.applyFilter()
-
-
-    //console.log(grouped_df)
+    const grouped_df = this.applyFilter("TRUE")
 
     if (grouped_df.length > 0) {
       DE_BW = this.findObjectByKey(grouped_df, 'bundesland', 'Baden-Württemberg')
@@ -179,7 +239,6 @@ export default class Home extends Component<Props, State> {
 
     }
 
-    //const selectedColor = "#FF851B"
     const selectedColor2 = "#3B2C25"
     const selectedColor = "#73614F"
     const selectedColor3 = "#292625"
@@ -306,24 +365,28 @@ export default class Home extends Component<Props, State> {
         <div class="body">
           <div class="filter-nav">
             <span class="filter-nav-heading">Beans</span>
+            <span class="arrow-down" style={{top: "33px", left: "160px"}} />
             <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_policy")}><Button buttonName="open access policy"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_leitlinie")}><Button buttonName="oa leitlinie"/></div>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_webseite")}><Button buttonName="open access website"/></div>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_beauftragte")}><Button buttonName="open access agent"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("berliner_erklaerung")}><Button buttonName="Berlin declaration"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa2020")}><Button buttonName="open access 2020"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfond")}><Button buttonName="publikationsfond"/></div>
             <span class="filter-nav-heading">Milk</span>
-            <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfond_zs")}><Button buttonName="zs publikationsfond"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfond_monographien")}><Button buttonName="monographien fond"/></div>
-            <span class="filter-nav-heading">Sugar</span>
+            <span class="arrow-down" style={{top: "374px", left: "160px"}} />
             <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("repositorium")}><Button buttonName="repository"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_verlag")}><Button buttonName="open access verlag"/></div>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfonds")}><Button buttonName="publication fond"/></div>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("ojs_standort")}><Button buttonName="OJS hosting"/></div>
+            <span class="filter-nav-heading">Sugar</span>
+            <span class="arrow-down" style={{top: "630px", left: "160px"}} />
+            <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_verlag")}><Button buttonName="open access publisher"/></div>
+            <div style={{width: "170px"}} onClick={() => this.updateFilter("dora_institution")}><Button buttonName="DORA"/></div>
           </div>
           {this.renderMap()}
           <div class="beans">
-            <div class="beans-percentage"><span>{((this.getBeansCount() / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
+            <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
             <div class="beans-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span></div>
             <div class="beans-table">
               {this.renderBeans()}
@@ -335,7 +398,7 @@ export default class Home extends Component<Props, State> {
           <div class="footer-text">
             <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Filter Machine’ originated from the two-week Summer School ‘Visualizing Open Access’ by University of Applied Sciences ... .</span></div>
             <div class="footer-autoren-heading"><span>Team</span></div>
-            <div class="footer-autoren"><span>Anna, Jonas, Nick</span></div>
+            <div class="footer-autoren"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
           </div>
           <div class="footer-logos">
             <div class="footer-logos-heading"><span>Affiliations</span></div>
