@@ -6,15 +6,13 @@ import './home.scss'
 
 import Button from './../../components/button/button'
 
-import store from './../../store/store'
-
 interface Props {
 
 }
 
 interface State {
   df: any,
-  filter: any
+  filter: Array<string>
 }
 
 const NUMBER_OF_INSTITUTIONS = 190
@@ -22,11 +20,11 @@ const NUMBER_OF_INSTITUTIONS = 190
 export default class Home extends Component<Props, State> {
 
   readonly state = {
-    df: store.getState().df,
-    filter: store.getState().filter
+    df: new DataFrame([]),
+    filter: ['bundesland']
   }
 
-  public componentDidMount = () => {
+  public componentDidMount = (): void => {
     this.createDF()
   }
 
@@ -35,7 +33,6 @@ export default class Home extends Component<Props, State> {
     try {
       await DataFrame.fromCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vT9-LW3L2SH1MXqUirRh71kB9YIdQtEjJMFjutMD_--woLMwzMAEcIGnLMjyfAfAtpmumobq6VwdooF/pub?gid=1552294243&single=true&output=csv').then((df: any) => {
         this.setState({df: df})
-        store.setState({df: df})
       })
     }
     catch (error) {
@@ -43,7 +40,7 @@ export default class Home extends Component<Props, State> {
     }
   }
 
-  private updateFilter = (filterString: string) => {
+  private updateFilter = (filterString: string): void => {
 
     const { filter } = this.state
 
@@ -59,11 +56,10 @@ export default class Home extends Component<Props, State> {
     }
 
     this.setState({filter: newFilter})
-    store.setState({filter: newFilter})
 
   }
 
-  private findObjectByKey(array: any, key: string, value: string) {
+  private findObjectByKey(array: any, key: string, value: string): any {
     for (var i = 0; i < array.length; i++) {
         if (array[i][key] === value) {
             return array[i].groupCount
@@ -72,11 +68,12 @@ export default class Home extends Component<Props, State> {
     return 0
   }
 
-  private applyFilter = (value: string) => {
+  private applyFilter = (value: string): any => {
 
     const { filter, df } = this.state
 
     let grouped_df = new Array()
+
 
     if (filter.length == 2) {
       grouped_df = df.groupBy(filter[0], filter[1]).aggregate((group: any) => group.count()).rename('aggregation', 'groupCount').filter((row: any) => row.get(filter[1]) === value).toCollection()
@@ -167,7 +164,7 @@ export default class Home extends Component<Props, State> {
     return grouped_df
   }
 
-  private getBeansCount = () => {
+  private getBeansCount = (): Array<number> => {
     const grouped_df_existing = this.applyFilter("TRUE")
     const grouped_df_missing = this.applyFilter("Recherche fehlt")
 
