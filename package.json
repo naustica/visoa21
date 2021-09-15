@@ -23,12 +23,9 @@
     "dataframe-js": "^1.4.4",
     "preact": "^10.4.8",
     "preact-router": "^3.2.1",
-    "typescript": "^3.9.3",
-    "unistore": "^3.5.2"
+    "typescript": "^3.9.3"
   },
   "devDependencies": {
-    "@testing-library/preact": "^1.0.2",
-    "@types/chai": "^4.2.11",
     "@types/jest": "^25.2.3",
     "awesome-typescript-loader": "^5.2.1",
     "chai": "^4.2.0",
