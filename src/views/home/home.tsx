@@ -166,7 +166,7 @@ export default class Home extends Component<Props, State> {
 
   private getBeansCount = (): Array<number> => {
     const grouped_df_existing = this.applyFilter("TRUE")
-    const grouped_df_missing = this.applyFilter("Recherche fehlt")
+    const grouped_df_missing = this.applyFilter("Recherche fehlt").concat(this.applyFilter(""))
 
     let beansCountExisting = 0
     let beansCountMissing = 0
@@ -359,6 +359,10 @@ export default class Home extends Component<Props, State> {
           </div>
           <div class="header-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span></div>
         </div>
+        <div class="header-body-twilight-zone">
+          <p>FILTER THE BEANS</p>
+          <p>AND ENJOY THE BLENDS</p>
+        </div>
         <div class="body">
           <div class="filter-nav">
             <span class="filter-nav-heading">Beans</span>
@@ -369,15 +373,9 @@ export default class Home extends Component<Props, State> {
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_beauftragte")}><Button buttonName="open access agent"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("berliner_erklaerung")}><Button buttonName="Berlin declaration"/></div>
-            <span class="filter-nav-heading">Milk</span>
-            <span class="arrow-down" style={{top: "374px", left: "160px"}} />
-            <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("repositorium")}><Button buttonName="repository"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfonds")}><Button buttonName="publication fond"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("ojs_standort")}><Button buttonName="OJS hosting"/></div>
-            <span class="filter-nav-heading">Sugar</span>
-            <span class="arrow-down" style={{top: "630px", left: "160px"}} />
-            <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_verlag")}><Button buttonName="open access publisher"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("dora_institution")}><Button buttonName="DORA"/></div>
           </div>
@@ -389,6 +387,14 @@ export default class Home extends Component<Props, State> {
               {this.renderBeans()}
             </div>
           </div>
+        </div>
+        <div class="body-footer-twilight-zone">
+          <p class="body-footer-twilight-zone-bold">HELP US ROAST MORE BEANS</p>
+          <p class="body-footer-twilight-zone-bold" style={{paddingBottom: "30px"}}>AND BREW MORE COFFEE</p>
+          <p class="body-footer-twilight-zone-thin">If your Hochschule has Open Access features, come along and help us make it visible.</p>
+          <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Write us your met criteria and we put you on the map!</p>
+          <p/>
+          <button>contact</button>
         </div>
         <hr class="footer-line"/>
         <div class="footer">
