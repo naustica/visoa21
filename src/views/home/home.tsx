@@ -12,7 +12,8 @@ interface Props {
 
 interface State {
   df: any,
-  filter: Array<string>
+  filter: Array<string>,
+  loading: boolean
 }
 
 const NUMBER_OF_INSTITUTIONS = 190
@@ -21,7 +22,8 @@ export default class Home extends Component<Props, State> {
 
   readonly state = {
     df: new DataFrame([]),
-    filter: ['bundesland']
+    filter: ['bundesland'],
+    loading: true
   }
 
   public componentDidMount = (): void => {
@@ -30,12 +32,15 @@ export default class Home extends Component<Props, State> {
 
   private createDF = async (): Promise<void> => {
 
+    this.setState({loading: true})
+
     try {
       await DataFrame.fromCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vT9-LW3L2SH1MXqUirRh71kB9YIdQtEjJMFjutMD_--woLMwzMAEcIGnLMjyfAfAtpmumobq6VwdooF/pub?gid=1552294243&single=true&output=csv').then((df: any) => {
-        this.setState({df: df})
+        this.setState({df: df, loading: false})
       })
     }
     catch (error) {
+      this.setState({loading: false})
       console.log(error)
     }
   }
@@ -60,7 +65,7 @@ export default class Home extends Component<Props, State> {
   }
 
   private findObjectByKey(array: any, key: string, value: string): any {
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         if (array[i][key] === value) {
             return array[i].groupCount
         }
@@ -72,102 +77,20 @@ export default class Home extends Component<Props, State> {
 
     const { filter, df } = this.state
 
-    let grouped_df = new Array()
+    let grouped_df
 
-
-    if (filter.length == 2) {
-      grouped_df = df.groupBy(filter[0], filter[1]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).toCollection()
-
+    if (filter.length > 1) {
+      grouped_df = df.groupBy(...filter).aggregate(
+        (group: any) => group.count()).rename('aggregation', 'groupCount')
+      for (let i = 1; i < filter.length; i++) {
+          grouped_df = grouped_df.filter((row: any) => row.get(filter[i]) === value)
+      }
+      return grouped_df.toCollection()
     }
 
-    else if (filter.length == 3) {
-      grouped_df = df.groupBy(filter[0],
-        filter[1], filter[2]).aggregate(
-          (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-            (row: any) => row.get(filter[1]) === value).filter(
-              (row: any) => row.get(filter[2]) === value).toCollection()
+    else {
+      return new Array()
     }
-
-    else if (filter.length == 4) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).filter(
-            (row: any) => row.get(filter[2]) === value).filter(
-              (row: any) => row.get(filter[3]) === value).toCollection()
-    }
-
-    else if (filter.length == 5) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).filter(
-            (row: any) => row.get(filter[2]) === value).filter(
-              (row: any) => row.get(filter[3]) === value).filter(
-                (row: any) => row.get(filter[4]) === value).toCollection()
-    }
-
-    else if (filter.length == 6) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === "TRUE").filter(
-            (row: any) => row.get(filter[2]) === "TRUE").filter(
-              (row: any) => row.get(filter[3]) === "TRUE").filter(
-                (row: any) => row.get(filter[4]) === "TRUE").filter(
-                  (row: any) => row.get(filter[5]) === "TRUE").toCollection()
-    }
-
-    else if (filter.length == 7) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).filter(
-            (row: any) => row.get(filter[2]) === value).filter(
-              (row: any) => row.get(filter[3]) === value).filter(
-                (row: any) => row.get(filter[4]) === value).filter(
-                  (row: any) => row.get(filter[5]) === value).filter(
-                    (row: any) => row.get(filter[6]) === value).toCollection()
-    }
-
-    else if (filter.length == 8) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6], filter[7]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).filter(
-            (row: any) => row.get(filter[2]) === value).filter(
-              (row: any) => row.get(filter[3]) === value).filter(
-                (row: any) => row.get(filter[4]) === value).filter(
-                  (row: any) => row.get(filter[5]) === value).filter(
-                    (row: any) => row.get(filter[6]) === value).filter(
-                      (row: any) => row.get(filter[7]) === value).toCollection()
-    }
-
-    else if (filter.length == 9) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6], filter[7], filter[8]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).filter(
-            (row: any) => row.get(filter[2]) === value).filter(
-              (row: any) => row.get(filter[3]) === value).filter(
-                (row: any) => row.get(filter[4]) === value).filter(
-                  (row: any) => row.get(filter[5]) === value).filter(
-                    (row: any) => row.get(filter[6]) === value).filter(
-                      (row: any) => row.get(filter[7]) === value).filter(
-                        (row: any) => row.get(filter[8]) === value).toCollection()
-    }
-
-    else if (filter.length == 10) {
-      grouped_df = df.groupBy(filter[0], filter[1], filter[2], filter[3], filter[4], filter[5], filter[6], filter[7], filter[8], filter[9]).aggregate(
-        (group: any) => group.count()).rename('aggregation', 'groupCount').filter(
-          (row: any) => row.get(filter[1]) === value).filter(
-            (row: any) => row.get(filter[2]) === value).filter(
-              (row: any) => row.get(filter[3]) === value).filter(
-                (row: any) => row.get(filter[4]) === value).filter(
-                  (row: any) => row.get(filter[5]) === value).filter(
-                    (row: any) => row.get(filter[6]) === value).filter(
-                      (row: any) => row.get(filter[7]) === value).filter(
-                        (row: any) => row.get(filter[8]) === value).filter(
-                          (row: any) => row.get(filter[9]) === value).toCollection()
-    }
-
-    return grouped_df
   }
 
   private getBeansCount = (): Array<number> => {
@@ -179,15 +102,15 @@ export default class Home extends Component<Props, State> {
     let beansCountnotKnown = 0
     let beansCountMissing = 0
 
-    for (var i = 0; i < grouped_df_existing.length; i++) {
+    for (let i = 0; i < grouped_df_existing.length; i++) {
         beansCountExisting += grouped_df_existing[i].groupCount
     }
 
-    for (var i = 0; i < grouped_df_not_known.length; i++) {
+    for (let i = 0; i < grouped_df_not_known.length; i++) {
         beansCountnotKnown += grouped_df_not_known[i].groupCount
     }
 
-    for (var i = 0; i < grouped_df_missing.length; i++) {
+    for (let i = 0; i < grouped_df_missing.length; i++) {
         beansCountMissing += grouped_df_missing[i].groupCount
     }
 
@@ -209,7 +132,6 @@ export default class Home extends Component<Props, State> {
         color = "#E1BF6C"
       }
       if (i < beansCountExisting + beansCountMissing && i > beansCountExisting) {
-        //color = "#C03323"
         color = "#B32E12"
       }
       if (i < beansCountExisting + beansCountMissing + beansCountnotKnown && i > beansCountExisting + beansCountMissing) {
@@ -367,100 +289,107 @@ export default class Home extends Component<Props, State> {
 
   public render = (): ComponentChild => {
 
-    return (
-      <div>
-        <div class="header">
-          <div class="header-heading">
-          <p>THE FULL AUTOMATIC</p>
-          <p>OPEN ACCESS</p>
-          <p>FILTER MACHINE</p>
-          </div>
-          <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the Bundesländer-Atlas OA and the OA Monitor. The data set is based on the current research status. It allows you to filter different oa criteria and to see how broad those are implemented German-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
-        </div>
-        <div class="header-body-twilight-zone">
-          <p>FILTER THE BEANS</p>
-          <p>AND ENJOY THE BLENDS</p>
-        </div>
-        <div class="body">
-          <div class="filter-nav">
-            <span class="filter-nav-heading">Criteria</span>
-            <span class="filter-nav-infotext">Institutions implement Open Access based on the following criteria. Select and filter by interest.</span>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_policy")}><Button buttonName="open access policy"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_webseite")}><Button buttonName="open access website"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_beauftragte")}><Button buttonName="open access agent"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("berliner_erklaerung")}><Button buttonName="Berlin declaration"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("repositorium")}><Button buttonName="repository"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfonds")}><Button buttonName="publication fond"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("ojs_standort")}><Button buttonName="OJS hosting"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_verlag")}><Button buttonName="open access publisher"/></div>
-            <div style={{width: "170px"}} onClick={() => this.updateFilter("dora_institution")}><Button buttonName="DORA"/></div>
-          </div>
-          {this.renderMap()}
-          <div class="beans">
-            <div class="beans-percentage-header-known"><span>Criteria Met</span></div>
-            <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
-            <div class="beans-infotext"><span>The percentage shows the implementation based on chosen criteria. The figures on the map show the number of the implementing institutions.</span></div>
-            <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
-            <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
-            <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
-            <div class="beans-infotext"><span>Each coffee bean represents one institution. The color denotes the implementation status.</span></div>
-            <div class="beans-legend">
-              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-              <path fill={"#3B2C25"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-              <path fill={"#3B2C25"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
-              </svg>
-              <div style={{position: "absolute", top: "-1px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>implemented</span></div>
-              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-              <path fill={"#B32E12"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-              <path fill={"#B32E12"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
-              </svg>
-              <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>not implemented</span></div>
-              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-              <path fill={"#C8C8C8"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-              <path fill={"#C8C8C8"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
-              </svg>
-              <div style={{position: "absolute", top: "33px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>unknown</span></div>
-              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-              <path fill={"#E1BF6C"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-              <path fill={"#E1BF6C"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
-              </svg>
-              <div style={{position: "absolute", top: "33px", left: "160px", fontSize: "13px", fontWeight: "700", lineHeight: "18px"}}><span>combination not implemented</span></div>
+    const { loading } = this.state
+
+    if (loading) {
+      return
+    }
+    else {
+      return (
+        <div>
+          <div class="header">
+            <div class="header-heading">
+            <p>THE FULL AUTOMATIC</p>
+            <p>OPEN ACCESS</p>
+            <p>FILTER MACHINE</p>
             </div>
-            <div class="beans-table">
-              {this.renderBeans()}
+            <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the Bundesländer-Atlas OA and the OA Monitor. The data set is based on the current research status. It allows you to filter different oa criteria and to see how broad those are implemented German-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
+          </div>
+          <div class="header-body-twilight-zone">
+            <p>FILTER THE BEANS</p>
+            <p>AND ENJOY THE BLENDS</p>
+          </div>
+          <div class="body">
+            <div class="filter-nav">
+              <span class="filter-nav-heading">Criteria</span>
+              <span class="filter-nav-infotext">Institutions implement Open Access based on the following criteria. Select and filter by interest.</span>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_policy")}><Button buttonName="open access policy"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_webseite")}><Button buttonName="open access website"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_beauftragte")}><Button buttonName="open access agent"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("berliner_erklaerung")}><Button buttonName="Berlin declaration"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("repositorium")}><Button buttonName="repository"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfonds")}><Button buttonName="publication fond"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("ojs_standort")}><Button buttonName="OJS hosting"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_verlag")}><Button buttonName="open access publisher"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("dora_institution")}><Button buttonName="DORA"/></div>
+            </div>
+            {this.renderMap()}
+            <div class="beans">
+              <div class="beans-percentage-header-known"><span>Criteria Met</span></div>
+              <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
+              <div class="beans-infotext"><span>The percentage shows the implementation based on chosen criteria. The figures on the map show the number of the implementing institutions.</span></div>
+              <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
+              <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
+              <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
+              <div class="beans-infotext"><span>Each coffee bean represents one institution. The color denotes the implementation status.</span></div>
+              <div class="beans-legend">
+                <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                <path fill={"#3B2C25"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#3B2C25"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                </svg>
+                <div style={{position: "absolute", top: "-1px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>implemented</span></div>
+                <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                <path fill={"#B32E12"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#B32E12"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                </svg>
+                <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>not implemented</span></div>
+                <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                <path fill={"#C8C8C8"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#C8C8C8"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                </svg>
+                <div style={{position: "absolute", top: "33px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>unknown</span></div>
+                <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                <path fill={"#E1BF6C"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#E1BF6C"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                </svg>
+                <div style={{position: "absolute", top: "33px", left: "160px", fontSize: "13px", fontWeight: "700", lineHeight: "18px"}}><span>combination not implemented</span></div>
+              </div>
+              <div class="beans-table">
+                {this.renderBeans()}
+              </div>
+            </div>
+          </div>
+          <div class="body-footer-twilight-zone">
+            <p class="body-footer-twilight-zone-bold">HELP US ROAST MORE BEANS</p>
+            <p class="body-footer-twilight-zone-bold" style={{paddingBottom: "30px"}}>AND BREW MORE COFFEE</p>
+            <p class="body-footer-twilight-zone-thin">If your institution implements Open Access features, come along and help us make it visible.</p>
+            <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Tell us your implemeted criteria combination and we put you in the blend and on the map!</p>
+            <p/>
+            <button><a class={"link"} href={"mailto:maxi.kindling@open-access-berlin.de"} target={"_blank"}>contact</a></button>
+          </div>
+          <hr class="footer-line"/>
+          <div class="footer">
+            <div class="footer-text">
+              <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Maker’ originated from the two-week Summer School ‘Visualizing Open Access’ held 2021 by the afffiliated institutions.</span></div>
+              <div class="footer-heading"><span>Team</span></div>
+              <div class="footer-infotext-small"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
+              <div class="footer-heading"><span>Project Documentation & Data Disclosure</span></div>
+              <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on the GitHub repository.</span></div>
+              <div class="footer-heading"><span>Imprint & Privacy Policy</span></div>
+            </div>
+            <div class="footer-logos">
+              <div class="footer-logos-heading"><span>Affiliations</span></div>
+              <img class="footer-logos-img" src="media/fu_logo.svg"/>
+              <img class="footer-logos-img" src="media/hu_logo.svg"/>
+              <img class="footer-logos-img" src="media/oanet_logo.svg"/>
+              <img class="footer-logos-img" src="media/fhp_logo.svg"/>
+              <img class="footer-logos-img" src="media/uclab_logo.svg"/>
+              <img class="footer-logos-img" src="media/oabb_logo.svg"/>
             </div>
           </div>
         </div>
-        <div class="body-footer-twilight-zone">
-          <p class="body-footer-twilight-zone-bold">HELP US ROAST MORE BEANS</p>
-          <p class="body-footer-twilight-zone-bold" style={{paddingBottom: "30px"}}>AND BREW MORE COFFEE</p>
-          <p class="body-footer-twilight-zone-thin">If your institution implements Open Access features, come along and help us make it visible.</p>
-          <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Tell us your implemeted criteria combination and we put you in the blend and on the map!</p>
-          <p/>
-          <button><a class={"link"} href={"mailto:maxi.kindling@open-access-berlin.de"} target={"_blank"}>contact</a></button>
-        </div>
-        <hr class="footer-line"/>
-        <div class="footer">
-          <div class="footer-text">
-            <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Maker’ originated from the two-week Summer School ‘Visualizing Open Access’ held 2021 by the afffiliated institutions.</span></div>
-            <div class="footer-heading"><span>Team</span></div>
-            <div class="footer-infotext-small"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
-            <div class="footer-heading"><span>Project Documentation & Data Disclosure</span></div>
-            <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on the GitHub repository.</span></div>
-            <div class="footer-heading"><span>Imprint & Privacy Policy</span></div>
-          </div>
-          <div class="footer-logos">
-            <div class="footer-logos-heading"><span>Affiliations</span></div>
-            <img class="footer-logos-img" src="media/fu_logo.svg"/>
-            <img class="footer-logos-img" src="media/hu_logo.svg"/>
-            <img class="footer-logos-img" src="media/oanet_logo.svg"/>
-            <img class="footer-logos-img" src="media/fhp_logo.svg"/>
-            <img class="footer-logos-img" src="media/uclab_logo.svg"/>
-            <img class="footer-logos-img" src="media/oabb_logo.svg"/>
-          </div>
-        </div>
-      </div>
-    )
+      )
+    }
   }
 }
