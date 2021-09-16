@@ -15,6 +15,7 @@
       font-size: 42px;
       line-height: 50px;
       font-family: Nobel;
+      text-shadow: 2px 2px #E1BF6C;
     }
     .span-header-line-break::before {
             content: "\A";
@@ -84,17 +85,19 @@
 
   .arrow-up {
     position: absolute;
+    top: 33px;
+    left: 160px;
     border: solid black;
     border-width: 0 3px 3px 0;
     display: inline-block;
-    padding: 4px;
+    padding: 3px;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
   }
 
   .arrow-down {
     position: absolute;
-    top: 30px;
+    top: 33px;
     left: 160px;
     border: solid black;
     border-width: 0 3px 3px 0;
