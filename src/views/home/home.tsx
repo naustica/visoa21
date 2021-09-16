@@ -214,6 +214,7 @@ export default class Home extends Component<Props, State> {
         color = "#C03323"
       }
       if (i < beansCountExisting + beansCountMissing + beansCountnotKnown && i > beansCountExisting + beansCountMissing) {
+        // not known
         color = "#C8C8C8"
       }
       components.push(
@@ -376,7 +377,7 @@ export default class Home extends Component<Props, State> {
                                       <span class="span-header-line-break">OPEN ACCESS</span>
                                       <span class="span-header-line-break">FILTER MACHINE</span>
           </div>
-          <div class="header-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span></div>
+          <div class="header-infotext"><span>Open Access has become a hot steaming topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. Ok, let’s grab a coffee! There is work to be done. We gathered our research on German publicly funded Universities of Science and the Arts from the Bundesländer-Atlas Open Access. Look for yourself and click on a filter below, we’ve got the perfect blend to get you going.</span></div>
         </div>
         <div class="header-body-twilight-zone">
           <p>FILTER THE BEANS</p>
@@ -385,7 +386,7 @@ export default class Home extends Component<Props, State> {
         <div class="body">
           <div class="filter-nav">
             <span class="filter-nav-heading">Beans</span>
-            <span class="filter-nav-infotext">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span>
+            <span class="filter-nav-infotext">The beans beneath denote the criteria for an institution’s openness to Open Access. Select by interest.</span>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_policy")}><Button buttonName="open access policy"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_webseite")}><Button buttonName="open access website"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
@@ -401,11 +402,11 @@ export default class Home extends Component<Props, State> {
           <div class="beans">
             <div class="beans-percentage-header-known"><span>Criteria Met</span></div>
             <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
-            <div class="beans-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span></div>
+            <div class="beans-infotext"><span>The percentages relate to the nationwide situation of publicly funded Universities of Applied Sciences. The absolute figures reflect the situation in the federal states.</span></div>
             <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
             <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
             <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
-            <div class="beans-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span></div>
+            <div class="beans-infotext"><span>Each institution is represented by a bean. The color indicates the degree of ripeness.</span></div>
             <div class="beans-legend">
               <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
               <path fill={"#3B2C25"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
@@ -439,14 +440,17 @@ export default class Home extends Component<Props, State> {
           <p class="body-footer-twilight-zone-thin">If your Hochschule has Open Access features, come along and help us make it visible.</p>
           <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Write us your met criteria and we put you on the map!</p>
           <p/>
-          <button>contact</button>
+          <button><a class={"link"} href={"mailto:maxi.kindling@open-access-berlin.de"} target={"_blank"}>contact</a></button>
         </div>
         <hr class="footer-line"/>
         <div class="footer">
           <div class="footer-text">
             <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Filter Machine’ originated from the two-week Summer School ‘Visualizing Open Access’ by University of Applied Sciences ... .</span></div>
-            <div class="footer-autoren-heading"><span>Team</span></div>
-            <div class="footer-autoren"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
+            <div class="footer-heading"><span>Team</span></div>
+            <div class="footer-infotext-small"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
+            <div class="footer-heading"><span>Project Documentation & Data Disclosure</span></div>
+            <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on our GitHub repository.</span></div>
+            <div class="footer-heading"><span>Imprint & Privacy Policy</span></div>
           </div>
           <div class="footer-logos">
             <div class="footer-logos-heading"><span>Affiliations</span></div>
