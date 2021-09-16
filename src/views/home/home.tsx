@@ -370,9 +370,10 @@ export default class Home extends Component<Props, State> {
     return (
       <div>
         <div class="header">
-          <div class="header-heading"><span>THE FULL AUTOMATIC</span>
-                                      <span class="span-header-line-break">OPEN ACCESS</span>
-                                      <span class="span-header-line-break">FILTER MACHINE</span>
+          <div class="header-heading">
+          <p>THE FULL AUTOMATIC</p>
+          <p>OPEN ACCESS</p>
+          <p>FILTER MACHINE</p>
           </div>
           <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the Bundesländer-Atlas OA and the OA Monitor. The data set is based on the current research status. It allows you to filter different oa criteria and to see how broad those are implemented German-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
         </div>
