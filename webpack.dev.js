@@ -48,6 +48,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+      filename: 'index.html',
+      favicon: 'public/media/favicon_oa.svg',
       inject: false
     }),
   ]
