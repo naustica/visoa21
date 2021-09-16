@@ -12,8 +12,7 @@ interface Props {
 
 interface State {
   df: any,
-  filter: Array<string>,
-  toggleInfo: boolean
+  filter: Array<string>
 }
 
 const NUMBER_OF_INSTITUTIONS = 190
@@ -22,8 +21,7 @@ export default class Home extends Component<Props, State> {
 
   readonly state = {
     df: new DataFrame([]),
-    filter: ['bundesland'],
-    toggleInfo: true
+    filter: ['bundesland']
   }
 
   public componentDidMount = (): void => {
@@ -211,7 +209,8 @@ export default class Home extends Component<Props, State> {
         color = "#E1BF6C"
       }
       if (i < beansCountExisting + beansCountMissing && i > beansCountExisting) {
-        color = "#C03323"
+        //color = "#C03323"
+        color = "#B32E12"
       }
       if (i < beansCountExisting + beansCountMissing + beansCountnotKnown && i > beansCountExisting + beansCountMissing) {
         // not known
@@ -368,8 +367,6 @@ export default class Home extends Component<Props, State> {
 
   public render = (): ComponentChild => {
 
-    const { toggleInfo } = this.state
-
     return (
       <div>
         <div class="header">
@@ -377,7 +374,7 @@ export default class Home extends Component<Props, State> {
                                       <span class="span-header-line-break">OPEN ACCESS</span>
                                       <span class="span-header-line-break">FILTER MACHINE</span>
           </div>
-          <div class="header-infotext"><span>Open Access has become a hot steaming topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. Ok, let’s grab a coffee! There is work to be done. We gathered our research on German publicly funded Universities of Science and the Arts from the Bundesländer-Atlas Open Access. Look for yourself and click on a filter below, we’ve got the perfect blend to get you going.</span></div>
+          <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the Bundesländer-Atlas OA and the OA Monitor. The data set is based on the current research status. It allows you to filter different oa criteria and to see how broad those are implemented German-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
         </div>
         <div class="header-body-twilight-zone">
           <p>FILTER THE BEANS</p>
@@ -385,8 +382,8 @@ export default class Home extends Component<Props, State> {
         </div>
         <div class="body">
           <div class="filter-nav">
-            <span class="filter-nav-heading">Beans</span>
-            <span class="filter-nav-infotext">The beans beneath denote the criteria for an institution’s openness to Open Access. Select by interest.</span>
+            <span class="filter-nav-heading">Criteria</span>
+            <span class="filter-nav-infotext">Institutions implement Open Access based on the following criteria. Select and filter by interest.</span>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_policy")}><Button buttonName="open access policy"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_webseite")}><Button buttonName="open access website"/></div>
             <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
@@ -402,22 +399,22 @@ export default class Home extends Component<Props, State> {
           <div class="beans">
             <div class="beans-percentage-header-known"><span>Criteria Met</span></div>
             <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
-            <div class="beans-infotext"><span>The percentages relate to the nationwide situation of publicly funded Universities of Applied Sciences. The absolute figures reflect the situation in the federal states.</span></div>
+            <div class="beans-infotext"><span>The percentage shows the implementation based on chosen criteria. The figures on the map show the number of the implementing institutions.</span></div>
             <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
             <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
             <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
-            <div class="beans-infotext"><span>Each institution is represented by a bean. The color indicates the degree of ripeness.</span></div>
+            <div class="beans-infotext"><span>Each coffee bean represents one institution. The color denotes the implementation status.</span></div>
             <div class="beans-legend">
               <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
               <path fill={"#3B2C25"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
               <path fill={"#3B2C25"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
               </svg>
-              <div style={{position: "absolute", top: "-1px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>criteria met</span></div>
+              <div style={{position: "absolute", top: "-1px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>implemented</span></div>
               <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-              <path fill={"#C03323"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-              <path fill={"#C03323"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+              <path fill={"#B32E12"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+              <path fill={"#B32E12"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
               </svg>
-              <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>missing</span></div>
+              <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>not implemented</span></div>
               <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
               <path fill={"#C8C8C8"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
               <path fill={"#C8C8C8"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
@@ -427,7 +424,7 @@ export default class Home extends Component<Props, State> {
               <path fill={"#E1BF6C"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
               <path fill={"#E1BF6C"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
               </svg>
-              <div style={{position: "absolute", top: "33px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>criteria not met</span></div>
+              <div style={{position: "absolute", top: "33px", left: "160px", fontSize: "13px", fontWeight: "700", lineHeight: "18px"}}><span>combination not implemented</span></div>
             </div>
             <div class="beans-table">
               {this.renderBeans()}
@@ -437,19 +434,19 @@ export default class Home extends Component<Props, State> {
         <div class="body-footer-twilight-zone">
           <p class="body-footer-twilight-zone-bold">HELP US ROAST MORE BEANS</p>
           <p class="body-footer-twilight-zone-bold" style={{paddingBottom: "30px"}}>AND BREW MORE COFFEE</p>
-          <p class="body-footer-twilight-zone-thin">If your Hochschule has Open Access features, come along and help us make it visible.</p>
-          <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Write us your met criteria and we put you on the map!</p>
+          <p class="body-footer-twilight-zone-thin">If your institution implements Open Access features, come along and help us make it visible.</p>
+          <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Tell us your implemeted criteria combination and we put you in the blend and on the map!</p>
           <p/>
           <button><a class={"link"} href={"mailto:maxi.kindling@open-access-berlin.de"} target={"_blank"}>contact</a></button>
         </div>
         <hr class="footer-line"/>
         <div class="footer">
           <div class="footer-text">
-            <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Filter Machine’ originated from the two-week Summer School ‘Visualizing Open Access’ by University of Applied Sciences ... .</span></div>
+            <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Maker’ originated from the two-week Summer School ‘Visualizing Open Access’ held 2021 by the afffiliated institutions.</span></div>
             <div class="footer-heading"><span>Team</span></div>
             <div class="footer-infotext-small"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
             <div class="footer-heading"><span>Project Documentation & Data Disclosure</span></div>
-            <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on our GitHub repository.</span></div>
+            <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on the GitHub repository.</span></div>
             <div class="footer-heading"><span>Imprint & Privacy Policy</span></div>
           </div>
           <div class="footer-logos">
