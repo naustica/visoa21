@@ -166,38 +166,47 @@ export default class Home extends Component<Props, State> {
 
   private getBeansCount = (): Array<number> => {
     const grouped_df_existing = this.applyFilter("TRUE")
-    const grouped_df_missing = this.applyFilter("Recherche fehlt").concat(this.applyFilter(""))
+    const grouped_df_not_known = this.applyFilter("Recherche fehlt").concat(this.applyFilter(""))
+    const grouped_df_missing = this.applyFilter("FALSE")
 
     let beansCountExisting = 0
+    let beansCountnotKnown = 0
     let beansCountMissing = 0
 
     for (var i = 0; i < grouped_df_existing.length; i++) {
         beansCountExisting += grouped_df_existing[i].groupCount
     }
 
+    for (var i = 0; i < grouped_df_not_known.length; i++) {
+        beansCountnotKnown += grouped_df_not_known[i].groupCount
+    }
+
     for (var i = 0; i < grouped_df_missing.length; i++) {
         beansCountMissing += grouped_df_missing[i].groupCount
     }
 
-    console.log(beansCountMissing)
-
-    return [beansCountExisting, beansCountMissing]
+    return [beansCountExisting, beansCountnotKnown, beansCountMissing]
   }
 
   private renderBeans = (): ComponentChild => {
 
     const beansCountExisting = this.getBeansCount()[0]
-    const beansCountMissing = this.getBeansCount()[1]
+    const beansCountnotKnown = this.getBeansCount()[1]
+    const beansCountMissing = this.getBeansCount()[2]
 
     let components = []
-    let color = "#C8A64B"
+    let color = "#3B2C25"
 
     for(var i = 1; i < Array.from(Array(NUMBER_OF_INSTITUTIONS)).length; i++) {
       if (i > beansCountExisting) {
-        color = "#3B2C25"
+        // default
+        color = "#C8C8C8"
       }
       if (i < beansCountExisting + beansCountMissing && i > beansCountExisting) {
-        color = "#4E7332"
+        color = "#C03323"
+      }
+      if (i < beansCountExisting + beansCountMissing + beansCountnotKnown && i > beansCountExisting + beansCountMissing) {
+        color = "#C8C8C8"
       }
       components.push(
         <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
@@ -381,8 +390,30 @@ export default class Home extends Component<Props, State> {
           </div>
           {this.renderMap()}
           <div class="beans">
+            <div class="beans-percentage-header-known"><span>Criteria Met</span></div>
             <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
             <div class="beans-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span></div>
+            <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
+            <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
+            <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
+            <div class="beans-infotext"><span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</span></div>
+            <div class="beans-legend">
+              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+              <path fill={"#3B2C25"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+              <path fill={"#3B2C25"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+              </svg>
+              <div style={{position: "absolute", top: "-1px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>criteria met</span></div>
+              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+              <path fill={"#C03323"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+              <path fill={"#C03323"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+              </svg>
+              <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>missing</span></div>
+              <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+              <path fill={"#C8C8C8"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+              <path fill={"#C8C8C8"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+              </svg>
+              <div style={{position: "absolute", top: "33px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>unknown</span></div>
+            </div>
             <div class="beans-table">
               {this.renderBeans()}
             </div>

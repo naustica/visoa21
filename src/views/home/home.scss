@@ -115,7 +115,20 @@
   .beans {
     width: 300px;
     padding: 10px;
-    padding-left: 25px;
+    padding-left: 30px;
+
+    &-percentage-header-known {
+      font-size: 26px;
+      font-family: Nobel;
+      line-height: 32px;
+      font-weight: 700;
+    }
+    &-percentage-header-unknown {
+      font-size: 20px;
+      font-family: Nobel;
+      line-height: 28px;
+      font-weight: 700;
+    }
 
     &-percentage {
       font-size: 100px;
@@ -123,17 +136,44 @@
       font-family: ERNESTINE;
     }
 
+    &-percentage-unknown {
+      font-size: 50px;
+      font-weight: 700;
+      font-family: ERNESTINE;
+      color: white;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+    }
+
+    &-legend-header {
+      font-size: 26px;
+      font-family: Nobel;
+      line-height: 32px;
+      font-weight: 700;
+      padding-top: 10px;
+    }
+
+    &-legend {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      height: 70px;
+      column-gap: 120px;
+      svg {
+
+      }
+    }
+
     &-infotext {
       font-size: 14px;
       font-weight: 300;
       line-height: 20px;
-      padding-left: 10px;
-      padding-right: 40px;
+      padding-right: 20px;
       padding-top: 10px;
+      padding-bottom: 20px;
     }
     &-table {
-      padding-top: 30px;
-      padding-left: 10px;
+      padding-top: 15px;
       max-width: 250px;
     }
   }
@@ -218,12 +258,12 @@
     line-height: 22px;
   }
   button {
-    background-color: #837365;
+    background-color: #3B2C25;
     font-weight: 600;
     border-width: 1px;
     border-radius: 10px;
     border-color: black;
-    color: black;
+    color: #C8A64B;
     padding: 10px;
     text-align: center;
     text-decoration: none;
