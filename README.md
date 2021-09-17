@@ -5,7 +5,7 @@ https://visoa21.herokuapp.com
 
 ### Starting point
 
-During the Summer School “Visualizing Open Access”, we were provided with the current research status of the Bundesländer-Atlas Open Access 2021. While knowledge on the situation of Open Access implementation at universities (Universitäten) is commonly in focus and widely research, little is known about Open Access at Universites of Applied Scienes and the Arts (Hochschulen). Our research question: What is the situation of Open Access at Hochschulen in Germany? 
+During the Summer School *[Visualizing Open Acces](https://uclab.fh-potsdam.de/visoa/)*, we were provided with the current research status of the Bundesländer-Atlas Open Access 2021. While knowledge on the situation of Open Access implementation at universities (Universitäten) is commonly in focus and widely research, little is known about Open Access at Universites of Applied Scienes and the Arts (Hochschulen). Our research question: What is the situation of Open Access at Hochschulen in Germany? 
 
 ### Data collection and Curation
 
@@ -28,8 +28,14 @@ Institutions implement Open Access based on a list of criteria. On our website, 
 
 ### Design process
 
-The visual storytelling was inspired by the word *filter* and the interaction of *filtering*. When playing with the idea, we found out that the infotainment approach was perceived as positive and low-threshold. We further elaborated this idea by choosing icons and colors close to the coffee world.
+The visual storytelling was inspired by the word *filter* and the interaction of *filtering*. The association of *filter coffee* came to mind and over time it turned out to be a viable metaphor. When playing with this idea, we found out that the infotainment approach was perceived as positive and low-threshold. We further elaborated this idea by choosing icons and colors close to the coffee world.
 
 ### Conclusion 
 
 We gathered information about Open Access implementation at all publicly funded Universites of Applied Scienes and the Arts (Hochschulen) in Germany (as of 2021). This has not been done to this extend and allows new insights into the landscape of Open Access implementation beyond the perspective on universities. Our research provides new data on the status of Open Access implementation at institutions which have not participated in the Excellence Initiative competition for universities / German government’s Excellence Strategy (since 2019). Our research therefore adds to a more differentiated depiction of research done open access in Germany. 
+
+### Team
+
+Anna Meide: Concept & Data visualization
+Jonas Mirbeth: Concept & Text
+Nick Haupka: Web development
