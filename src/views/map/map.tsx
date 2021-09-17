@@ -138,7 +138,7 @@ export default class Map extends Component<Props, State> {
       if (i < beansCountExisting + beansCountMissing + beansCountnotKnown && i > beansCountExisting + beansCountMissing) {
         // not known
         //color = "#C8C8C8"
-        color = "#E1BF6C"
+        color = "#D9CBBD"
       }
       components.push(
         <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
@@ -347,8 +347,8 @@ export default class Map extends Component<Props, State> {
                 </svg>
                 <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>not implemented</span></div>
                 <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                <path fill={"#E1BF6C"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-                <path fill={"#E1BF6C"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                <path fill={"#D9CBBD"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#D9CBBD"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
                 </svg>
                 <div style={{position: "absolute", top: "33px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>unknown</span></div>
                 <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
