@@ -30,14 +30,23 @@ Institutions implement Open Access based on a list of criteria. On our website, 
 
 The visual storytelling was inspired by the word *filter* and the interaction of *filtering*. The association of *filter coffee* came to mind and over time it turned out to be a viable metaphor. When playing with this idea, we found out that the infotainment approach was perceived as positive and low-threshold. We further elaborated this idea by choosing icons and colors close to the coffee world.
 
+#### Ideation 
+![Beispiel](design_concept/ideation.png)
+
+#### Styleguide
+![Beispiel](design_concept/styleguide.png)
+
+#### Data Visualization
+![Beispiel](design_concept/demo.png)
+
 ### Conclusion 
 
 We gathered information about Open Access implementation at all publicly funded Universites of Applied Scienes and the Arts (Hochschulen) in Germany (as of 2021). This has not been done to this extend and allows new insights into the landscape of Open Access implementation beyond the perspective on universities. Our research provides new data on the status of Open Access implementation at institutions which have not participated in the Excellence Initiative competition for universities / German government’s Excellence Strategy (since 2019). Our research therefore adds to a more differentiated depiction of research done open access in Germany. 
 
 ### Team
 
-Anna Meide: Concept & Data visualization
+**Anna Meide**: Concept & Data visualization
 
-Jonas Mirbeth: Concept & Text
+**Jonas Mirbeth**: Concept & Text
 
-Nick Haupka: Web development
+**Nick Haupka**: Web development
