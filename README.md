@@ -1,4 +1,8 @@
 ## visoa21
+This website offers a fully comprehensive overview of Open Access implementation at publicly funded Universities of Applied Sciences and the Arts. 
+
+https://visoa21.herokuapp.com
+
 Starting point
 
 During the Summer School “Visualizing Open Access”, we were provided with the current research status of the Bundesländer-Atlas Open Access 2021. While knowledge on the situation of Open Access implementation at universities (Universitäten) is commonly in focus and widely research, little is known about Open Access at Universites of Applied Scienes and the Arts (Hochschulen). Our research question: What is the situation of Open Access at Hochschulen in Germany? 
