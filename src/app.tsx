@@ -3,7 +3,7 @@ import Router from 'preact-router'
 
 import './app.scss'
 
-import Home from './views/home/home'
+import Map from './views/map/map'
 
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div class="app">
         <Router>
-          <Home path="/" />
+          <Map path="/" />
         </Router>
       </div>
     )

@@ -2,7 +2,7 @@ import { h, Component, ComponentChild } from 'preact'
 // @ts-ignore
 import DataFrame from 'dataframe-js'
 
-import './home.scss'
+import './map.scss'
 
 import Button from './../../components/button/button'
 
@@ -18,7 +18,7 @@ interface State {
 
 const NUMBER_OF_INSTITUTIONS = 190
 
-export default class Home extends Component<Props, State> {
+export default class Map extends Component<Props, State> {
 
   readonly state = {
     df: new DataFrame([]),
@@ -64,7 +64,8 @@ export default class Home extends Component<Props, State> {
 
   }
 
-  private findObjectByKey(array: any, key: string, value: string): any {
+  private findObjectByKey(array: Array<any>, key: string, value: string): any {
+
     for (let i = 0; i < array.length; i++) {
         if (array[i][key] === value) {
             return array[i].groupCount
@@ -73,7 +74,7 @@ export default class Home extends Component<Props, State> {
     return 0
   }
 
-  private applyFilter = (value: string): any => {
+  private applyFilter = (value: string): Array<any> => {
 
     const { filter, df } = this.state
 
@@ -129,14 +130,15 @@ export default class Home extends Component<Props, State> {
     for(var i = 1; i < Array.from(Array(NUMBER_OF_INSTITUTIONS)).length; i++) {
       if (i > beansCountExisting + beansCountMissing + beansCountnotKnown) {
         // default
-        color = "#E1BF6C"
+        color = "#A38AAB"
       }
       if (i < beansCountExisting + beansCountMissing && i > beansCountExisting) {
         color = "#B32E12"
       }
       if (i < beansCountExisting + beansCountMissing + beansCountnotKnown && i > beansCountExisting + beansCountMissing) {
         // not known
-        color = "#C8C8C8"
+        //color = "#C8C8C8"
+        color = "#E1BF6C"
       }
       components.push(
         <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
@@ -303,7 +305,7 @@ export default class Home extends Component<Props, State> {
             <p>OPEN ACCESS</p>
             <p>FILTER MACHINE</p>
             </div>
-            <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on open science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the Bundesländer-Atlas OA and the OA Monitor. The data set is based on the current research status. It allows you to filter different oa criteria and to see how broad those are implemented German-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
+            <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on Open Science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the <a href={"10.5281/zenodo.4644124"} target={"_blank"}>Open Access Bundesländer-Atlas</a> and the <a href={"https://open-access-monitor.de"} target={"_blank"}>Open Access Monitor</a>. The data set is based on the current research status. It allows you to filter different Open Access criteria and to see how broad those are implemented Germany-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
           </div>
           <div class="header-body-twilight-zone">
             <p>FILTER THE BEANS</p>
@@ -316,10 +318,10 @@ export default class Home extends Component<Props, State> {
               <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_policy")}><Button buttonName="open access policy"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_webseite")}><Button buttonName="open access website"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_2020")}><Button buttonName="open access 2020"/></div>
-              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_beauftragte")}><Button buttonName="open access agent"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_beauftragte")}><Button buttonName="oa representative"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("berliner_erklaerung")}><Button buttonName="Berlin declaration"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("repositorium")}><Button buttonName="repository"/></div>
-              <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfonds")}><Button buttonName="publication fond"/></div>
+              <div style={{width: "170px"}} onClick={() => this.updateFilter("publikationsfonds")}><Button buttonName="publication fund"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("ojs_standort")}><Button buttonName="OJS hosting"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("oa_verlag")}><Button buttonName="open access publisher"/></div>
               <div style={{width: "170px"}} onClick={() => this.updateFilter("dora_institution")}><Button buttonName="DORA"/></div>
@@ -345,13 +347,13 @@ export default class Home extends Component<Props, State> {
                 </svg>
                 <div style={{position: "absolute", top: "-1px", left: "160px", fontSize: "13px", fontWeight: "700"}}><span>not implemented</span></div>
                 <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                <path fill={"#C8C8C8"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-                <path fill={"#C8C8C8"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                <path fill={"#E1BF6C"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#E1BF6C"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
                 </svg>
                 <div style={{position: "absolute", top: "33px", left: "25px", fontSize: "13px", fontWeight: "700"}}><span>unknown</span></div>
                 <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                <path fill={"#E1BF6C"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
-                <path fill={"#E1BF6C"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
+                <path fill={"#A38AAB"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>
+                <path fill={"#A38AAB"} d="M12.3932 1.01267C10.4368 -0.943728 6.30311 0.018695 3.1634 3.17418C0.0237033 6.31388 -0.938717 10.4476 1.0019 12.404C1.9801 13.3822 1.80655 9.86379 5.82978 5.84055C9.66369 2.00665 13.3714 1.99087 12.3932 1.01267Z"/>
                 </svg>
                 <div style={{position: "absolute", top: "33px", left: "160px", fontSize: "13px", fontWeight: "700", lineHeight: "18px"}}><span>combination not implemented</span></div>
               </div>
@@ -366,16 +368,16 @@ export default class Home extends Component<Props, State> {
             <p class="body-footer-twilight-zone-thin">If your institution implements Open Access features, come along and help us make it visible.</p>
             <p class="body-footer-twilight-zone-thin" style={{paddingBottom: "30px"}}>Tell us your implemeted criteria combination and we put you in the blend and on the map!</p>
             <p/>
-            <button><a class={"link"} href={"mailto:maxi.kindling@open-access-berlin.de"} target={"_blank"}>contact</a></button>
+            <button><a class={"link"} href={"mailto:oabb@open-access-berlin.de"} target={"_blank"}>contact</a></button>
           </div>
           <hr class="footer-line"/>
           <div class="footer">
             <div class="footer-text">
               <div class="footer-infotext"><span>The data visualization project ‘The Full Automatic Open Access Maker’ originated from the two-week Summer School ‘Visualizing Open Access’ held 2021 by the afffiliated institutions.</span></div>
               <div class="footer-heading"><span>Team</span></div>
-              <div class="footer-infotext-small"><span>Anna Meide, Jonas Mirbeth, Nick Haupka</span></div>
+              <div class="footer-infotext-small"><span><a class={"autoren-link"} href={"https://www.instagram.com/meideanna"} target={"_blank"}>Anna Meide</a>, <a class={"autoren-link"} href={"https://orcid.org/0000-0001-7711-7088"} target={"_blank"}>Jonas Mirbeth</a>, <a class={"autoren-link"} href={"https://github.com/naustica"} target={"_blank"}>Nick Haupka</a></span></div>
               <div class="footer-heading"><span>Project Documentation & Data Disclosure</span></div>
-              <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on the GitHub repository.</span></div>
+              <div class="footer-infotext-small"><span>You can find a detailed project documentation and the data set on the <a class={"autoren-link"} href={"https://github.com/naustica/visoa21"} target={"_blank"}>GitHub repository</a>.</span></div>
               <div class="footer-heading"><span>Imprint & Privacy Policy</span></div>
             </div>
             <div class="footer-logos">
