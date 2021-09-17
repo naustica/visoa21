@@ -9,6 +9,17 @@ We filtered Hochschulen and generated a list of 222. Additional data on the inst
 
 Institutions implement Open Access based on a list of criteria. On our website, you can filter these criteria and see the percentage of Hochschulen which have implemented them on a map of Germany. 
 
+Open access policy – Policy/Guideline for the steps of OA implementation	
+Open access website – Webpage for information on OA 	
+OA 2020	– Global initiative to propel OA forward – https://oa2020.org
+OA representative – Job description of a person for OA affairs	
+Berlin declaration – Berlin Declaration on Open Access to Knowledge in the Sciences and Humanities – https://openaccess.mpg.de/Berlin-Declaration
+Repository – Server for the orderly provision and archiving of electronic data	
+Publication fund – Financial resources managed by scientific institutions and used to finance publication fees	
+OJS hosting – Infrastructure for Open Journal Systems (OJS) – https://pkp.sfu.ca/ojs/
+Open access publisher – Publisher at the institution	
+DORA – The Declaration on Research Assessment (DORA – https://sfdora.org 
+
 Conclusion 
 
 We gathered information about Open Access implementation at all publicly funded Universites of Applied Scienes and the Arts (Hochschulen) in Germany (as of 2021). This has not been done to this extend and allows new insights into the landscape of Open Access implementation beyond the perspective on universities. Our research provides new data on the status of Open Access implementation at institutions which have not participated in the Excellence Initiative competition for universities / German government’s Excellence Strategy (since 2019). Our research therefore adds to a more differentiated depiction of research done open access in Germany. 
