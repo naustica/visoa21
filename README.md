@@ -1,5 +1,5 @@
 ## visoa21
-This website offers a fully comprehensive overview of Open Access implementation at publicly funded Universities of Applied Sciences and the Arts. 
+This website offers a fully comprehensive overview of Open Access implementation at publicly funded Universities of Applied Sciences and the Arts in Germany. 
 
 https://visoa21.herokuapp.com
 
