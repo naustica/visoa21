@@ -120,6 +120,8 @@ export default class Map extends Component<Props, State> {
 
   private renderBeans = (): ComponentChild => {
 
+    const { filter } = this.state
+
     const beansCountExisting = this.getBeansCount()[0]
     const beansCountnotKnown = this.getBeansCount()[1]
     const beansCountMissing = this.getBeansCount()[2]
@@ -130,7 +132,12 @@ export default class Map extends Component<Props, State> {
     for(var i = 1; i < Array.from(Array(NUMBER_OF_INSTITUTIONS)).length; i++) {
       if (i > beansCountExisting + beansCountMissing + beansCountnotKnown) {
         // default
-        color = "#A38AAB"
+        if (filter.length === 1) {
+          color = "#C8C8C8"
+
+        } else {
+          color = "#A38AAB"
+        }
       }
       if (i < beansCountExisting + beansCountMissing && i > beansCountExisting) {
         color = "#B32E12"
@@ -305,7 +312,7 @@ export default class Map extends Component<Props, State> {
             <p>OPEN ACCESS</p>
             <p>FILTER MACHINE</p>
             </div>
-            <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on Open Science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the <a href={"10.5281/zenodo.4644124"} target={"_blank"}>Open Access Bundesländer-Atlas</a> and the <a href={"https://open-access-monitor.de"} target={"_blank"}>Open Access Monitor</a>. The data set is based on the current research status. It allows you to filter different Open Access criteria and to see how broad those are implemented Germany-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
+            <div class="header-infotext"><span>Open Access has become a steaming hot topic in academic publishing. But while research on Open Science infrastructures at universities is thriving, little is known about the situation at publicly funded Universities of Applied Sciences. This interactive data visualization website processes data from the <a href={"https://zenodo.org/record/4644124"} target={"_blank"}>Open Access Bundesländer-Atlas</a> and the <a href={"https://open-access-monitor.de"} target={"_blank"}>Open Access Monitor</a>. The data set is based on the current research status. It allows you to filter different Open Access criteria and to see how broad those are implemented Germany-wide. Still there is work to be done, so let us get a cup of coffee and begin.</span></div>
           </div>
           <div class="header-body-twilight-zone">
             <p>FILTER THE BEANS</p>
@@ -330,7 +337,7 @@ export default class Map extends Component<Props, State> {
             <div class="beans">
               <div class="beans-percentage-header-known"><span>Criteria Met</span></div>
               <div class="beans-percentage"><span>{((this.getBeansCount()[0] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
-              <div class="beans-infotext"><span>The percentage shows the implementation based on chosen criteria. The figures on the map show the number of the implementing institutions.</span></div>
+              <div class="beans-infotext"><span>The percentage shows the implementation Germany-wide based on chosen criteria. The figures on the map show the number of the implementing institutions.</span></div>
               <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
               <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
               <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
