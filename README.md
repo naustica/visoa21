@@ -18,7 +18,7 @@ Repository – Server for the orderly provision and archiving of electronic dat
 Publication fund – Financial resources managed by scientific institutions and used to finance publication fees	
 OJS hosting – Infrastructure for Open Journal Systems (OJS) – https://pkp.sfu.ca/ojs/
 Open access publisher – Publisher at the institution	
-DORA – The Declaration on Research Assessment (DORA – https://sfdora.org
+DORA – The Declaration on Research Assessment (DORA – https://sfdora.org 
 
 Conclusion 
 
