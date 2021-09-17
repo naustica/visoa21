@@ -37,5 +37,7 @@ We gathered information about Open Access implementation at all publicly funded 
 ### Team
 
 Anna Meide: Concept & Data visualization
+
 Jonas Mirbeth: Concept & Text
+
 Nick Haupka: Web development
