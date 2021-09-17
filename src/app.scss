@@ -1,9 +1,9 @@
 // main
 
 // google fonts
-@import "node_modules/sass-google-fonts/src/GoogleFonts.scss";
+//@import "node_modules/sass-google-fonts/src/GoogleFonts.scss";
 
-@include google-font('Roboto', '400,500,700');
+//@include google-font('Roboto', '400,500,700');
 
 *,
 *::before,
@@ -20,7 +20,9 @@ html {
 body {
   color: #222;
   background-color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  //font-family: 'Roboto', sans-serif;
+  //font-family: ERNESTINE;
+  font-family: Aktiv-Grotesk, sans-serif;
 }
 
 .app {

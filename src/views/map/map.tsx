@@ -334,7 +334,7 @@ export default class Map extends Component<Props, State> {
               <div class="beans-percentage-header-unknown"><span>Unknown</span></div>
               <div class="beans-percentage-unknown"><span>{((this.getBeansCount()[1] / NUMBER_OF_INSTITUTIONS) * 100).toFixed(0)}%</span></div>
               <div class="beans-legend-header"><span>Roast by Hochschule</span></div>
-              <div class="beans-infotext"><span>Each coffee bean represents one institution. The color denotes the implementation status.</span></div>
+              <div class="beans-infotext"><span>Each coffee bean represents one of the 190 institutions. The color denotes the implementation status.</span></div>
               <div class="beans-legend">
                 <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                 <path fill={"#3B2C25"} d="M13.9866 2.60586C12.0302 0.649467 0.654742 12.0408 2.61114 13.9814C4.56754 15.922 8.70121 14.9753 11.8409 11.8199C14.9806 8.68016 15.943 4.54648 13.9866 2.60586Z"/>

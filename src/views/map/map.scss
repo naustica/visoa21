@@ -115,7 +115,7 @@
   padding-bottom: 150px;
 
   .beans {
-    width: 300px;
+    width: 310px;
     padding: 10px;
     padding-left: 30px;
 
@@ -143,8 +143,9 @@
       font-weight: 700;
       font-family: ERNESTINE;
       color: white;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
+      color: #D9CBBD;
+      //-webkit-text-stroke-width: 1px;
+      //-webkit-text-stroke-color: #A38AAB;
     }
 
     &-legend-header {
