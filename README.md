@@ -1,7 +1,7 @@
 ## cOAffee - The Full Automatic Open Access Filter Machine
 This website offers a comprehensive overview of Open Access implementation at publicly funded Universities of Applied Sciences and the Arts in Germany. 
 
-https://visoa21.herokuapp.com
+https://visoa21.meketre.de
 
 ### Starting point
 
